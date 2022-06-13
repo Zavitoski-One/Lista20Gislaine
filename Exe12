@@ -1,0 +1,253 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+struct tel{			//Telefone, celular e DDD do usuario.
+	int ddd;
+	int tele;
+	int cel;
+};
+
+struct ende{		//Endereço do usuario.
+	char rua[50];
+	char bairro[50];
+	char cidade[50];
+	char estado[2];
+	char pais[50];
+	int num;
+	int cep;
+};
+
+struct data{		//Data de nascimento do usuario..
+	int dia;
+	int mes;
+	int ano;
+};
+
+struct geral{		//Dados básicos do usuario.
+	char nome[50];
+	char email[50];
+	char obs[50];
+	
+//-----------------------------------------//	
+	
+	struct tel telefone;                    //Referenciando as outras estruturas (secundárias: tel, ende, data) dentro da principal (agenda) e nomeando
+	struct ende endereco;                   //variáveis para cada tipo criado (no tipo "tel", a variável é telefone)
+	struct data niver;
+};
+
+//---------------------------------------------------------------FUNÇÃO PRINCIPAL--------------------------------------------------------------------------------------//
+
+int main(){
+	
+	int menu1, menu2;
+	char nomeaux[50];
+	int dia, mes;
+	struct geral agenda[100];
+	char auxadd[100];
+	int n;
+	
+	auxadd[100]=n;
+	
+	printf("Digite o que deseja fazer:\n 1 - Busca por primeiro nome. \n 2 - Busca por mes de aniversario. \n 3 - Busca por dia e mes de aniversario. \n 4 - Adicionar contato. \n 5 - Remover contato. \n 6 - Mostrar todos os contatos da agenda. \n 7 - SAIR\n");
+	scanf("%d", menu1);
+	
+	switch(menu1)
+	{
+		case 1:
+			printf("\nBuscar por primeiro nome. Digite o nome a ser buscado:\n");
+			scanf("%s", &agenda[n].nome);
+			
+			printf("Contatos com o nome %s", agenda[n].nome);
+			if(strcmp(agenda[n].nome, nomeaux)==0){
+			   printf("Nome................: %s\n", agenda[n].nome);
+		       printf("Email...............: %d\n", agenda[n].email); 
+		       printf("Telefone............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone.tele);						
+               printf("Celular.............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone.cel);
+		       printf("Data de Nascimento..: %d/%d/%d\n", agenda[n].niver.dia, agenda[n].niver.mes, agenda[n].niver.ano); 
+		       printf("Endereco............: %s, %d, %s - %d, %s - %s, %s\n", agenda[n].endereco.rua, agenda[n].endereco.num, agenda[n].endereco.bairro, agenda[n].endereco.cep, agenda[n].endereco.cidade, agenda[n].endereco.estado, agenda[n].endereco.pais);
+			   printf("Observacao..........: %s\n", agenda[n].obs);
+			}else
+			{
+				printf("Nenhum contato com esse nome.");
+			}
+			
+		break;
+			
+		case 2:
+			printf("\nBuscar por mês de aniversário. Digite o mês a ser buscado:\n");
+			scanf("%d", &agenda[n].niver.mes);
+			
+			printf("\nContatos com aniversario no mes %d\n", agenda[n].niver.mes);
+			if(strcmp(agenda[n].niver.mes, mes)==0){
+			printf("Nome................: %s\n", agenda[n].nome);
+		    printf("Email...............: %d\n", agenda[n].email); 
+		    printf("Telefone............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone);						
+            printf("Celular.............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone.cel);
+		    printf("Data de Nascimento..: %d/%d/%d\n", agenda[n].niver.dia, agenda[n].niver.mes, agenda[n].niver.ano); 
+		    printf("Endereco............: %s, %d, %s - %d, %s - %s, %s\n", agenda[n].endereco.rua, agenda[n].endereco.num, agenda[n].endereco.bairro, agenda[n].endereco.cep, agenda[n].endereco.cidade, agenda[n].endereco.estado, agenda[n].endereco.pais);
+			printf("Observacao..........: %s\n", agenda[n].obs);
+			}else
+			{
+				printf("Nenhum contato com esse mes de nascimento.");
+			}
+			
+			break;
+		
+		case 3:
+			printf("\nBuscar por dia e mês de aniversário. Digite o dia e mês a ser buscado:\n");
+			scanf("%d %d", &agenda[n].niver.dia, &agenda[n].niver.mes);
+			
+			printf("\nContatos com aniversario no dia %d e mes %d\n", agenda[n].niver.dia, agenda[n].niver.mes);
+			if(strcmp(agenda[n].niver.dia, dia)==0){
+			printf("Nome................: %s\n", agenda[n].nome);
+		    printf("Email...............: %d\n", agenda[n].email); 
+		    printf("Telefone............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone);						
+            printf("Celular.............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone.cel);
+		    printf("Data de Nascimento..: %d/%d/%d\n", agenda[n].niver.dia, agenda[n].niver.mes, agenda[n].niver.ano); 
+		    printf("Endereco............: %s, %d, %s - %d, %s - %s, %s\n", agenda[n].endereco.rua, agenda[n].endereco.num, agenda[n].endereco.bairro, agenda[n].endereco.cep, agenda[n].endereco.cidade, agenda[n].endereco.estado, agenda[n].endereco.pais);
+			printf("Observacao..........: %s\n", agenda[n].obs);
+			}else
+			{
+				printf("Nenhum contato com essa data de nascimento.");
+			}
+			
+			break;
+		
+		case 4:
+			cadastraContato();
+			break;
+		
+		case 5:
+			removeContato();
+			break;
+		
+		case 6:
+			printf("Mostrar contatos da agenda!\n Escolha uma opcao:\n 1 - Mostrar apenas nome, email e telefone dos contatos. \n 2 - Mostrar todos os dados dos contatos.");
+			scanf("%d", &menu2);
+
+			switch(menu2)
+			{
+				case 1:
+					printf("\nMostrar apenas nome, email e telefone do contato:\n");
+					printf("Nome................: %s\n", agenda[n].nome);
+				    printf("Email...............: %d\n", agenda[n].email); 
+				    printf("Telefone............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone);						
+		            
+					break;
+					
+				case 2:
+					printf("\nMostrar todos os dados do contato:\n");
+					printf("Nome................: %s\n", agenda[n].nome);
+				    printf("Email...............: %d\n", agenda[n].email); 
+				    printf("Telefone............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone);						
+		            printf("Celular.............: %d %d\n", agenda[n].telefone.ddd, agenda[n].telefone.cel);
+				    printf("Data de Nascimento..: %d/%d/%d\n", agenda[n].niver.dia, agenda[n].niver.mes, agenda[n].niver.ano); 
+				    printf("Endereco............: %s, %d, %s - %d, %s - %s, %s\n", agenda[n].endereco.rua, agenda[n].endereco.num, agenda[n].endereco.bairro, agenda[n].endereco.cep, agenda[n].endereco.cidade, agenda[n].endereco.estado, agenda[n].endereco.pais);
+					printf("Observacao..........: %s\n", agenda[n].obs);
+
+					break;
+					
+				default:
+					printf("Código inválido. Tente novamente.");
+					break;
+			}
+			
+			break;
+		
+		case 7:
+			return 0;
+			break;
+		
+		default:
+			printf("Código inválido. Tente novamente.");
+			break;
+	}
+}
+
+//---------------------------------------------------------------FUNÇÃO CADASTRO--------------------------------------------------------------------------------------//
+
+void cadastraContato(struct geral agenda, int n)
+{
+		char auxadd[100];     //Auxiliar para adicionar registros.
+		int	esc;
+		char resp;
+		
+	
+			
+		do{
+			printf("Adicionar pessoa.\n");
+			
+			printf("Digite o nome:\n");
+			scanf("%s", &agenda[auxadd].nome);
+			
+			printf("\nDigite o email:\n");
+			scanf("%s", &agenda[auxadd].email);
+			
+			printf("\nDigite o DDD de seu estado:\n");
+			scanf("%s", &agenda[auxadd].telefone.ddd);
+			
+			printf("\nDigite o telefone:\n");
+			scanf("%s", &agenda[auxadd].telefone.tele);
+			
+			printf("\nDigite o celular:\n");
+			scanf("%s", &agenda[auxadd].telefone.cel)
+			
+			printf("\nDigite sua rua/avenida:\n");
+			scanf("%s", &agenda[auxadd].endereco.rua);
+			
+			printf("\nDigite o numero:\n");
+			scanf("%d", &agenda[auxadd].endereco.num);
+			
+			printf("\nDigite o bairro:\n");
+			scanf("%s", &agenda[auxadd].endereco.bairro);
+			
+			printf("\nDigite o CEP:\n");
+			scanf("%d", &agenda[auxadd].endereco.cep);
+			
+			printf("\nDigite a cidade:\n");
+			scanf("%s", &agenda[auxadd].endereco.cidade);
+			
+			printf("\nDigite o estado (Formato 2 digitos. Ex: SP):\n");
+			scanf("%s", &agenda[auxadd].endereco.estado);
+			
+			printf("\nDigite o pais:\n");
+			scanf("%s", &agenda[auxadd].endereco.pais);
+			
+			printf("\nAlguma observacao? S/N\n");
+			scanf("%c", resp);
+			if((resp=='S') || (resp=='s')) // Se a resposta for igual a 'S', o programa abrirá o scanf para digitar a observação, senão, ele simplesmente seguirá, sem necessidade do comando "else".
+			{
+			scanf("%s", &agenda[auxadd].obs);
+			}
+			
+			printf("Contato adicionado com sucesso! \n Nome: %s\n Email: %s\n Fixo: %d - %d\n Celular: %d - %d\n Endereco: %s, %d\n %s, %d - %s, %s - %s", &agenda.nome, &agenda.email, &agenda.telefone.ddd, &agenda.telefone.tele, &agenda.telefone.ddd, &agenda.telefone.cel, &agenda.endereco.rua, &agenda.endereco.num, &,agenda.endereco.bairro, &agenda.endereco.cep, &agenda.endereco.cidade, &agenda.endereco.estado, &agenda.endereco.pais);					
+			auxadd++;
+			
+			printf("/n Adicionar outro contato?/n 1 - Sim\n 2 - Nao");
+		}while(esc==1);
+	
+	
+}
+
+//---------------------------------------------------------------FUNÇÃO REMOVE--------------------------------------------------------------------------------------//
+
+void removeCadastro()
+{
+	struct geral contato;
+	int rmvaux[100];       //Auxiliar para remover registros.
+	
+	printf("Digite o contato a ser removido:");
+	scanf("%", &agenda[rmvaux].nome);
+	
+	if(strcmp(agenda[rmvaux], contato)==0)
+	{
+		rmvaux--;
+	}
+	
+	if(strcmp(agenda[rmvaux], contato)!=0)
+	{
+		printf("Contato não consta na lista.");
+	}
+}
